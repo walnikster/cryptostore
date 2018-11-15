@@ -29,7 +29,7 @@ import com.uleos.cryptotools.server.btc.entity.BtcAdress;
 public class BtcAdressResource {
 
 	@Inject
-	BtcAdressService btcAdressService;
+	private BtcAdressService btcAdressService;
 
 	@POST
 	public Response addAdress(JsonObject json, @Context HttpServletRequest request) {
@@ -43,7 +43,6 @@ public class BtcAdressResource {
 	@GET
 	public Response adresses() {
 		List<BtcAdress> findAll = btcAdressService.findAll();
-
 		JsonArrayBuilder jsonArrayBuilder = Json.createArrayBuilder();
 		findAll.forEach(a -> jsonArrayBuilder.add(a.toJson()));
 		return Response.ok(jsonArrayBuilder.build()).build();
@@ -54,5 +53,4 @@ public class BtcAdressResource {
 	public BtcAdress adress(@PathParam("id") Long id) {
 		return btcAdressService.findById(id);
 	}
-
 }
